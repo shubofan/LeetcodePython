@@ -5,7 +5,7 @@ class Solution:
 
     def findPeakElement(self, nums: List[int]) -> int:
         # for i in range(len(nums) - 1):
-        #     if nums[i] > nums[i + 1]: # it has been approved that nums[i] > nums[i - 1] in previous interation
+        #     if nums[i] > nums[i + 1]: # it has been proved that nums[i] > nums[i - 1] in previous iteration
         #         return i
         # return len(nums) - 1
 
