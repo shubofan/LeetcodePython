@@ -18,4 +18,3 @@ class Solution:
             # put lst[i] to path, start to dfs from lst[i + 1]
             for i in range(start, len(lst)):
                 self.dfs(lst[:i] + lst[i + 1:], path + [lst[i]], i, k, n)
-            set
