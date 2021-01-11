@@ -17,7 +17,7 @@ class Solution:
             # find the node where list2 to append to
             if idx == b:
                 to = cur.next
-                # romve nodes before to and we can stop traverse whole linked list
+                # remove nodes before to and we can stop traverse whole linked list
                 cur.next = None
                 break
             idx += 1
