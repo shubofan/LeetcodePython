@@ -25,6 +25,9 @@
 #             # The first elements canoot go back, so it need to placed at last
 #             res.insert(0, s.pop())
 #         return res
+from collections import defaultdict
+from typing import List
+
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
 
