@@ -8,8 +8,6 @@ class Solution:
 
         pre_diff = nums[1] - nums[0]
 
-        res = 0
-
         # [1, 1, 1], start from 1th one, so res = 1 else starting from 0th, so res = 2
         if pre_diff == 0:
             res = 1
