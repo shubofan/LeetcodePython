@@ -12,5 +12,5 @@ class Solution:
 
         # then go through the list again, if certain element is < n, it is a missing one since it was not incremented
         # previously
-        res = [i + 1 for i, num in enumerate(nums) if num <= n]
+        res = [idx + 1 for idx, num in enumerate(nums) if num <= n]
         return res
