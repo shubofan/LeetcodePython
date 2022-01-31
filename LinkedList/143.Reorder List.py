@@ -6,6 +6,9 @@ class ListNode:
 
 
 class Solution:
+    # 1. find the mid
+    # 2. reverse 2nd half, and split it two 2 sub lists
+    # 3. merge 2 sub-lists
     def reorderList(self, head: ListNode) -> None:
         """
         Do not return anything, modify head in-place instead.
@@ -42,19 +45,19 @@ class Solution:
         if not cur:
             return
 
-            # find the mid
+        # find the mid
         while fst and fst.next:
             pre = slo
             slo = slo.next
             fst = fst.next.next
 
-        # slo it mid
+        # slo it mid point
         cur = slo
         if pre:
             pre.next = None
         pre = None
 
-        # reverse 2nd half 1 - 2 - 3 - 4 - 5 becomes to 1 - 2 - None,  5 - 4 - 3 - None
+        # reverse 2nd half, so 1 - 2 - 3 - 4 - 5 becomes to 1 - 2 - None,  5 - 4 - 3 - None
         while cur:
             tem = cur.next
             cur.next = pre
@@ -71,6 +74,7 @@ class Solution:
 
             cur1.next = cur2
             cur1 = tem1
+
             cur2.next = cur1
             cur2 = tem2
 
@@ -78,8 +82,6 @@ class Solution:
         # to append 3 after 4
         if cur2:
             cur = head
-            while cur:
-                if not cur.next:
-                    cur.next = cur2
-                    break
+            while cur.next:
                 cur = cur.next
+            cur.next = cur2

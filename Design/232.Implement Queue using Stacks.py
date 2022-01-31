@@ -1,44 +1,24 @@
 class MyQueue:
-
+    # Amortized O(1) for each operation
     def __init__(self):
-        """
-        Initialize your data structure here.
-        """
-        self.stack = []
-        self.stack2 = []
+        self.s1 = []  # stack
+        self.s2 = []  # queue. All the elements in s2 are FIFO
 
     def push(self, x: int) -> None:
-        """
-        Push element x to the back of queue.
-        """
-
-        self.stack += [x]
+        self.s1 += [x]
 
     def pop(self) -> int:
-        """
-        Removes the element from in front of queue and returns that element.
-        """
-
-        if self.stack2:
-            return self.stack2.pop()
-        while self.stack:
-            self.stack2 += [self.stack.pop()]
-
-        return self.stack2.pop()
+        self.peek()
+        return self.s2.pop()
 
     def peek(self) -> int:
-        """
-        Get the front element.
-        """
-        pop = self.pop()
-        self.stack2 += [pop]
-        return pop
+        if not self.s2:
+            while self.s1:
+                self.s2 += [self.s1.pop()]
+        return self.s2[-1]
 
     def empty(self) -> bool:
-        """
-        Returns whether the queue is empty.
-        """
-        return len(self.stack) == 0 and len(self.stack2) == 0
+        return not self.s1 and not self.s2
 
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()

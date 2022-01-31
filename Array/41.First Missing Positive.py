@@ -17,3 +17,18 @@ class Solution:
             if nums[i] != i + 1:
                 return i + 1
         return len(nums) + 1
+
+    # bucket sort
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        bucket = [False] * n
+
+        for num in nums:
+            if 0 < num <= n:
+                bucket[num - 1] = True
+
+        for i in range(n):
+            if not bucket[i]:
+                return i + 1
+
+        return n + 1

@@ -1,5 +1,7 @@
 from typing import List
-
+#  DFS Solution
+#  Time complexity: O(N^2) # the entire graph need to be visited
+#  Space complexity: O(N^2)
 
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:

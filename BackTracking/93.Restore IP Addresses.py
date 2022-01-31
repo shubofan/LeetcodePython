@@ -13,7 +13,8 @@ class Solution:
         if len(ip) == 4 and start == len(s):
             self.res += ['.'.join(ip)]
             return
-
+        if len(ip) > 4:
+            return
         for i in range(start + 1, len(s) + 1):
             segment = s[start:i]
             if (0 < int(segment) <= 255 and segment[0] != '0') or (int(segment) == 0 and len(segment) == 1):

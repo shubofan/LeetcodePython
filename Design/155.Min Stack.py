@@ -1,3 +1,4 @@
+# Two stacks solution
 class MinStack:
 
     def __init__(self):
@@ -26,6 +27,32 @@ class MinStack:
         if self.stack and self.min:
             return self.min[-1]
 
+# One stacks solution
+
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.s = []
+
+    # push a pair (value, min element until current element get pushed)
+    def push(self, val: int) -> None:
+
+        if not self.s:
+            self.s += [(val, val)]
+        else:
+            self.s += [(val, min(val, self.s[-1][1]))]
+
+    def pop(self) -> None:
+        self.s.pop()
+
+    def top(self) -> int:
+        return self.s[-1][0]
+
+    def getMin(self) -> int:
+        return self.s[-1][1]
 # Your MinStack object will be instantiated and called as such:
 # obj = MinStack()
 # obj.push(x)

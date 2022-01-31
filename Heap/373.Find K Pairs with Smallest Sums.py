@@ -1,7 +1,10 @@
 import heapq
+from typing import List
 
 
 class Solution:
+    # Brute force:
+
     # def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
     #     pq = []
     #     for i in range(len(nums1)):
@@ -39,3 +42,40 @@ class Solution:
             k -= 1
 
         return res
+
+
+    # Time: The complexity of this algorithm is O(klogk) if k<n, because we repeat k times, and each time we do a O(logk) heappush.
+    # Space: O(K)
+
+    class Solution:
+        def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+            res = []
+            m, n = len(nums1), len(nums2)
+
+            # min heap
+            pq = []
+            heapq.heappush(pq, (nums1[0] + nums2[0], (0, 0)))
+
+            # 1st time: (i,j) -> (i+1, j) or (i, j+1)
+            # 2nd time: (i+1, j) -> (i+2, j) or (i+1, j+1)
+            # 2nd time: (i, j+1) -> (i, j+2) or (i+1, j+1)
+
+            # (i+1, j+1) appear 2 times, so we need to remove duplicates
+            seen = set()
+            seen.add((0, 0))
+
+            while k > 0 and pq:
+                sum_, pair = heapq.heappop(pq)
+                k -= 1
+                i, j = pair[0], pair[1]
+                res += [[nums1[i], nums2[j]]]
+
+                if i + 1 < m and (i + 1, j) not in seen:
+                    seen.add((i + 1, j))
+                    heapq.heappush(pq, (nums1[i + 1] + nums2[j], (i + 1, j)))
+
+                if j + 1 < n and (i, j + 1) not in seen:
+                    seen.add((i, j + 1))
+                    heapq.heappush(pq, (nums1[i] + nums2[j + 1], (i, j + 1)))
+
+            return res

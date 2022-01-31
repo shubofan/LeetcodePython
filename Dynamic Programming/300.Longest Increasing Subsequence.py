@@ -7,10 +7,8 @@ class Solution:
     #     if not nums:
     #         return 0
     #     # dp[i] represents the length of the longest increasing subsequence up to ith index only
-    #     dp = [0] * len(nums)
-    #     res = 0
+    #     dp = [1] * len(nums)
     #     for i in range(len(nums)):
-    #         dp[i] = 1
     #         for j in range(i):
     #             if nums[j] < nums[i]:
     #                 dp[i] = max(dp[j] + 1, dp[i])

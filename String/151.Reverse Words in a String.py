@@ -1,7 +1,6 @@
 class Solution:
-    def reverseWords(self, s: str) -> str:
-        s = s.strip(' ')
-        lst = s.split(' ')
-        lst.reverse()
-        r = filter(lambda x: x != '', lst)
-        return ' '.join(r)
+	def reverseWords(self, s: str) -> str:
+		lst = s.strip().split(' ')
+		lst = filter(lambda x: x != '', lst)
+
+		return ' '.join(reversed(list(lst)))

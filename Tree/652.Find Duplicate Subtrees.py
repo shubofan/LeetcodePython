@@ -8,6 +8,8 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# Time Complexity: O(N2), where N is the number of nodes in the tree. We visit each node once, but each creation of serial may take O(N) work.
+# Space Complexity: O(N2), the size of count .
 
 class Solution:
     def findDuplicateSubtrees(self, root: TreeNode) -> List[TreeNode]:

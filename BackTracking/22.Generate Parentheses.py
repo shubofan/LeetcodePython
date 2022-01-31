@@ -2,27 +2,23 @@ from typing import List
 
 
 class Solution:
-    def __init__(self):
-        self.res = []
+	def generateParenthesis(self, n: int) -> List[str]:
+		self.res = []
 
-    def generateParenthesis(self, n: int) -> List[str]:
-        self.dfs(n, '')
-        return self.res
+		def helper(l, r, n, path):
 
-    def dfs(self, n: int, path: str) -> None:
-        if len(path) == 2 * n:
-            self.res += [path]
-            return
-        # first element must be '('
-        if len(path) == 0:
-            self.dfs(n, path + '(')
-        # last element must be ')'
-        elif len(path) == 2 * n - 1:
-            self.dfs(n, path + ')')
-        else:
-            # if count of '(' is less than n, we can add '('
-            if path.count('(') != n:
-                self.dfs(n, path + '(')
-            # if count of ')' is less than '(', we can add ')'
-            if path.count('(') > path.count(')'):
-                self.dfs(n, path + ')')
+			if l == r == n:
+				self.res += [path]
+				return
+			if l < n:
+				helper(l + 1, r, n, path + '(')
+			if r < l:
+				helper(l, r + 1, n, path + ')')
+
+		helper(0, 0, n, '')
+		return self.res
+
+if __name__ == '__main__':
+    s = Solution()
+
+    print(s.generateParenthesis(2))

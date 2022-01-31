@@ -26,4 +26,3 @@ class Solution:
                         if s + nums[l] == target:
                             res.add((nums[i], nums[j], nums[k], nums[l]))
         return res
-    

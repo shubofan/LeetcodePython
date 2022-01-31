@@ -55,7 +55,7 @@ class Solution:
             to = self.g[cur].pop(0)
 
             if self.dfs(to, tickets, path + [to]):
-                return self.res
+                return True
             else:
                 self.g[cur].append(to)
         return False

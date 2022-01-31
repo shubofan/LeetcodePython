@@ -1,28 +1,28 @@
-from typing import List
+from collections import Counter
 
 
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        p_cnt = [0] * 26
-        s_cnt = [0] * 26
-
-        for c in p:
-            p_cnt[ord(c) - 97] += 1
+        # o(1)
+        p_cnt = Counter(p)
+        s_cnt = Counter()
 
         l, r = 0, 0
         res = []
+        #Time Complexity - O(S)
+        # Each array element element would be traversed at most twice.
 
+        #Space complexity - O(1)
+        #Since we are using constant extra space (map) of size 26
         while r < len(s):
-            if r < len(p) - 1:
-                s_cnt[ord(s[r]) - 97] += 1
-                r += 1
-                continue
-
-            s_cnt[ord(s[r]) - 97] += 1
-            if s_cnt == p_cnt:
-                res += [l]
-            s_cnt[ord(s[l]) - 97] -= 1
+            s_cnt[s[r]] += 1
+            # s[l:r+1] is anagram
+            if r - l == len(p) - 1:
+                if p_cnt == s_cnt:
+                    res += [l]
+                s_cnt[s[l]] -= 1
+                if s_cnt[s[l]] == 0:
+                    s_cnt.pop(s[l])
+                l += 1
             r += 1
-            l += 1
-
         return res

@@ -13,8 +13,13 @@ class Solution:
             if target == 0:
                 self.res += [path]
             return
+        # candidates  to be add from candidates[i:]
         for i in range(start, len(candidates)):
-            if i > start and candidates[i] == candidates[i - 1]:
+            # candidates[i] is not first to be add, and it == element added in path
+            # example: first call self.dfs(candidates, target - candidates[i], i + 1, path + [candidates[i]])
+            # then WILL NOT call self.dfs(candidates, target - candidates[i+1], i + 2, path + [candidates[i+1]])
+            # if candidates[i+1] == candidates[i]
+            if i != start and candidates[i] == candidates[i - 1]:
                 continue
             else:
                 self.dfs(candidates, target - candidates[i], i + 1, path + [candidates[i]])

@@ -9,7 +9,7 @@ class Solution:
 
         for build in buildings:
             points += [(build[0], build[2])]  # left corner
-            points += [(build[1], -1 * build[2])]  # right corner
+            points += [(build[1], -1 * build[2])]  # right corner, if height is negative, so that it is the right corner
 
         points = sorted(points, key=lambda x: (x[0], -x[1]))
 
@@ -28,7 +28,7 @@ class Solution:
 
             # current max height
             top = -heap[0]
-            # if max height changed
+            # if max height changed, So we NEED to add it to the res
             if top != max_h:
                 res += [[point[0], top]]
                 max_h = top

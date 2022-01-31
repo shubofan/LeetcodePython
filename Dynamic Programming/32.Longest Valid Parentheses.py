@@ -8,9 +8,9 @@ class Solution:
 
     #             if c == '(': # meet left, put it to stack
     #                 stack += [i]
-    #             else: # meet right, pop the top '('
+    #             else: # meet ')', pop the top '('
     #                 stack.pop()
-    #                 if not stack: # if stack is empty, put ')' to stack
+    #                 if not stack: # if stack is empty, put index of ')' to stack
     #                     stack += [i]
     #                 else: # update the res
     #                     res = max(res, i - stack[-1])
@@ -29,7 +29,7 @@ class Solution:
                         dp[i] = dp[i - 2] + 2
                     else:
                         dp[i] = 2
-                # s[i] = ')'
+                # s[i - 1] = ')'
                 elif i - dp[i - 1] - 1 >= 0 and s[i - dp[i - 1] - 1] == '(':
                     if i - dp[i - 1] - 2 >= 0:
                         dp[i] = dp[i - 1] + 2 + dp[i - dp[i - 1] - 2]

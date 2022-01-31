@@ -1,4 +1,5 @@
 class Solution:
+    # duplicate
     def search(self, nums: List[int], target: int) -> bool:
         n = len(nums)
 
@@ -26,3 +27,6 @@ class Solution:
                 else:
                     l = m + 1
         return False
+
+# Follow up: This problem is similar to Find Minimum in Rotated Sorted Array, but nums may contain duplicates. Would this affect the runtime complexity? How and why?
+# Yes, when there could be duplicates in the array, the worst case is O(n).

@@ -1,45 +1,32 @@
+import collections
 from collections import deque
-
-
-class Node:
-    def __init__(self, name: int):
-        self.name = name
-        self.outbound = []
-        self.inbound = []
+from typing import List
 
 
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        indegree = [0] * numCourses
+        g = collections.defaultdict(set)
 
-        g = {}
-        q = deque()
-        sort = []
+        for p in prerequisites:
+            g[p[1]].add(p[0])
+            indegree[p[0]] += 1
 
-        # Create graph
-        for i in range(0, numCourses):
-            g[i] = Node(i)
+        q = collections.deque()
 
-        for edge in prerequisites:
-            from_, to = edge[1], edge[0]
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                q += [i]
 
-            from_node = g.get(from_)
-            to_node = g.get(to)
+        res = []
 
-            from_node.outbound += [to_node]
-            to_node.inbound += [from_node]
-
-            # topological sort
-        for k, v in g.items():
-            if not v.inbound:
-                q.append(v)
         while q:
-            top = q.popleft()
-            sort += [top.name]
-            out_nodes = top.outbound
-            for node in out_nodes:
-                node.inbound.remove(top)
-                if not node.inbound:
-                    q.append(node)
+            node = q.popleft()
+            res += [node]
+            for nbr in g[node]:
+                indegree[nbr] -= 1
+                if indegree[nbr] == 0:
+                    q += [nbr]
 
-        # len(sort) == numCourses means there is a valid topological sort else, there is a cycle so retrun []
-        return sort if len(sort) == numCourses else []
+        # len(res) == numCourses means there is a valid topological sort else, there is a cycle so return []
+        return res if len(res) == numCourses else []

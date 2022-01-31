@@ -1,24 +1,22 @@
-import math
-from typing import List
-
-
 class Solution:
-    def minEatingSpeed(self, piles: List[int], H: int) -> int:
-        l, r = 1, max(piles)
-        if H <= len(piles):
-            return r
+	# Time O(N*log(Max(P))
+	# Space O(1)
+	def minEatingSpeed(self, piles: List[int], h: int) -> int:
+		def get_total_time(piles, speed):  # O(n)
+			hours = 0
+			for pile in piles:
+				hours += (math.ceil(pile / speed))
+			return hours
 
-        def get_total(speed: int):
-            total = 0
-            for pile in piles:
-                total += (math.ceil(pile / speed))
-            return total
+		l, r = 1, max(piles)
+		n = len(piles)
 
-        while l < r:
-            mid = (l + r) // 2
-            total = get_total(mid)
-            if total > H:
-                l = mid + 1
-            else:
-                r = mid
-        return l
+		# log(max(p))
+		while l < r:
+			speed = (l + r) // 2
+			hours = get_total_time(piles, speed)
+			if hours > h:  # each too slow
+				l = speed + 1
+			else:
+				r = speed
+		return l

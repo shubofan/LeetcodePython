@@ -7,20 +7,16 @@ class Solution:
         if n == 1:
             return nums[0]
 
-        res = float('inf')
         l, r = 0, n - 1
-
-        while l <= r:
+        # if nums[m] > nums[r], min should be always in [m + 1, r] (explained in Essence). To satisfy the invariant, l = m + 1;
+        # if nums[m] < nums[l], min should be always in [l + 1, m] (explained in Essence), to satisfy the assertion, hi = mi, lo = lo + 1;
+        # else (nums[l] <= nums[m] <= nums[r]), min should be always nums[l].
+        while l < r:
             m = (l + r) // 2
-            if nums[m] == nums[l]:
-                l += 1
-                res = min(res, nums[m])
-            # right is ordered, update res with smallest in right, then search left
-            elif nums[m] < nums[l]:
-                res = min(res, nums[m])
-                r = m - 1
-            # left is ordered, update res with smallest in left, then search right
-            else:
-                res = min(res, nums[l])
+            if nums[m] > nums[r]: #  if nums[m] > nums[r], min should be always in [m + 1, r] (explained in Essence). To satisfy the invariant, l = m + 1;
                 l = m + 1
-        return res
+            elif nums[m] < nums[r]: # if nums[m] < nums[r], min should be always in [l, m] (explained in Essence)
+                r = m
+            else: # When num[m] == num[r], we couldn't sure the position of minimum in mid's left or right, so just let upper bound reduce one.
+                r -= 1
+        return nums[l]
